@@ -1,15 +1,11 @@
 
 "use client";
 import React, { useState, useEffect } from 'react';
+import { Input } from '@/app/components/ui/input.tsx';
 
-function SelectableButton({content, click}) {
-  const [isSelect, setIsSelect] = useState(false);
-  const clicked = () => {
-    const new_select = !isSelect;
-    if (click) click(new_select);
-    setIsSelect(new_select);
-  };
-  return <button onClick={clicked} className="text-white pb-1 pt-1 pl-2 pr-2 text-sm cursor-pointer rounded-sm text-md transition-all" style={{backgroundColor: isSelect ? 'red' : 'green'}}>{content}</button>;
+
+function Button(props) {
+  return <button type={props.type} onClick={props.click} className={(props.class) ? props.class : "w-full bg-[#242424] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md hover:bg-[#070707] outline-none hover:scale-105 transition-all"}>{props.value}</button>;
 }
 
 function CheckBox({click}) {
@@ -32,13 +28,37 @@ function TodoElement({text, checked}) {
 }
 
 export default function Home() {
+  
+  const [elementToBeAdd, setElementToBeAdd] = useState("");
+  const [elements, setElements] = useState<string[]>([]);
+  
+  const add_element = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (elementToBeAdd === "") throw error;
+      const new_elements = [...elements];
+      new_elements.push(elementToBeAdd);
+      setElements(new_elements);
+      setElementToBeAdd("");
+      
+    } catch (error) {
+      console.error("Could not add element to list");
+      alert("Element could not be added to list!");
+      return;
+    }
+    return;
+  };
+  
   return (
     <section className="w-screen h-screen flex flex-row justify-center bg-[#070707] p-5">
       <div className="w-1/3 h-full flex flex-col p-5 justify-center gap-1">
-        <TodoElement text="Prepare the supper"/>
-        <TodoElement text="Clean the bedroom"/>
-        <TodoElement text="Wash the dishes"/>
-        <TodoElement text="Make coffee"/>
+        {elements.map((element, index) => (
+	  <TodoElement key={index} text={element} />
+	))}
+	<form onSubmit={add_element} className="mb-3 mt-3 flex flex-row justify-center gap-2">
+	  <Input className="w-full" autoComplete="off" type="text" value={elementToBeAdd} placeholder="Element name" onChange={(e) => {setElementToBeAdd(e.target.value);}} required />
+	  <Button class="w-1/4 bg-[#242424] bg-[#242424] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md hover:bg-[#070707] outline-none hover:scale-105 transition-all" type="submit" value="Add"/>
+	</form>
       </div>
     </section>
   )
