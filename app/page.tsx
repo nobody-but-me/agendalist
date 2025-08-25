@@ -1,6 +1,8 @@
 
 "use client";
 import React, { useState, useEffect } from 'react';
+
+import Horizontal from '@/app/components/ui/horizontal_line.tsx';
 import { Input } from '@/app/components/ui/input.tsx';
 
 
@@ -29,21 +31,21 @@ function TodoElement({text, checked}) {
 
 export default function Home() {
   
-  const [elementToBeAdd, setElementToBeAdd] = useState("");
-  const [elements, setElements] = useState<string[]>([]);
+  const [taskToBeAdd, setTaskToBeAdd] = useState("");
+  const [tasks, setTasks] = useState<string[]>([]);
   
-  const add_element = async (e: React.FormEvent) => {
+  const add_task = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (elementToBeAdd === "") throw error;
-      const new_elements = [...elements];
-      new_elements.push(elementToBeAdd);
-      setElements(new_elements);
-      setElementToBeAdd("");
+      if (taskToBeAdd === "") throw error;
+      const new_tasks = [...tasks];
+      new_tasks.push(taskToBeAdd);
+      setTasks(new_taks);
+      setTaskToBeAdd("");
       
     } catch (error) {
-      console.error("Could not add element to list");
-      alert("Element could not be added to list!");
+      console.error("Could not add task to list");
+      alert("Task could not be added to list!");
       return;
     }
     return;
@@ -52,11 +54,12 @@ export default function Home() {
   return (
     <section className="w-screen h-screen flex flex-row justify-center bg-[#070707] p-5">
       <div className="w-1/3 h-full flex flex-col p-5 justify-center gap-1">
-        {elements.map((element, index) => (
-	  <TodoElement key={index} text={element} />
-	))}
-	<form onSubmit={add_element} className="mb-3 mt-3 flex flex-row justify-center gap-2">
-	  <Input className="w-full" autoComplete="off" type="text" value={elementToBeAdd} placeholder="Element name" onChange={(e) => {setElementToBeAdd(e.target.value);}} required />
+        {(tasks.length === 0) ? <span>No tasks added yet</span> : <>{tasks.map((task, index) => (
+	  <TodoElement key={index} text={task} />
+	))}</>}
+	<Horizontal />
+	<form onSubmit={add_task} className="flex flex-row justify-center gap-2">
+	  <Input className="w-full" autoComplete="off" type="text" value={taskToBeAdd} placeholder="Task title" onChange={(e) => {setTaskToBeAdd(e.target.value);}} required />
 	  <Button class="w-1/4 bg-[#242424] bg-[#242424] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md hover:bg-[#070707] outline-none hover:scale-105 transition-all" type="submit" value="Add"/>
 	</form>
       </div>
