@@ -17,7 +17,7 @@ function CheckBox({click}) {
     if (click) click(new_select);
     setIsSelect(new_select);
   };
-  return <button onClick={clicked} className="bg-[#242424] flex flex-row justify-center items-center text-white w-5 h-5 text-sm cursor-pointer rounded-sm text-md transition-all">{(isSelect === true) ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 transition-all"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg> : <></>}</button>;
+  return <button onClick={clicked} className="bg-[#242424] hover:bg-[#525252] flex flex-row justify-center items-center text-white w-5 h-5 text-sm cursor-pointer rounded-sm text-md transition-all">{(isSelect === true) ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 transition-all"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg> : <></>}</button>;
 }
 
 function TodoElement({text, checked}) {
@@ -40,7 +40,7 @@ export default function Home() {
       if (taskToBeAdd === "") throw error;
       const new_tasks = [...tasks];
       new_tasks.push(taskToBeAdd);
-      setTasks(new_taks);
+      setTasks(new_tasks);
       setTaskToBeAdd("");
       
     } catch (error) {
@@ -60,7 +60,7 @@ export default function Home() {
 	<Horizontal />
 	<form onSubmit={add_task} className="flex flex-row justify-center gap-2">
 	  <Input className="w-full" autoComplete="off" type="text" value={taskToBeAdd} placeholder="Task title" onChange={(e) => {setTaskToBeAdd(e.target.value);}} required />
-	  <Button class="w-1/4 bg-[#242424] bg-[#242424] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md hover:bg-[#070707] outline-none hover:scale-105 transition-all" type="submit" value="Add"/>
+	  <Button class="w-1/4 bg-[#242424] hover:bg-[#525252] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md outline-none hover:scale-105 transition-all" type="submit" value="Add"/>
 	</form>
       </div>
     </section>
