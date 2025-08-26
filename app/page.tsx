@@ -52,8 +52,9 @@ export default function Home() {
   };
   
   return (
-    <section className="w-screen h-screen flex flex-row justify-center bg-[#070707] p-5">
-      <div className="w-1/3 h-full flex flex-col p-5 justify-center gap-1">
+    <section className="w-screen h-screen flex flex-row justify-center items-center bg-[#070707] p-5">
+      <div className="w-1/3 h-auto flex flex-col p-5 justify-center gap-1 border-2 border-solid border-white rounded-sm">
+        <Horizontal />
         {(tasks.length === 0) ? <span>No tasks added yet</span> : <>{tasks.map((task, index) => (
 	  <TodoElement key={index} text={task} />
 	))}</>}
@@ -62,6 +63,7 @@ export default function Home() {
 	  <Input className="w-full" autoComplete="off" type="text" value={taskToBeAdd} placeholder="Task title" onChange={(e) => {setTaskToBeAdd(e.target.value);}} required />
 	  <Button class="w-1/4 bg-[#242424] hover:bg-[#525252] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md outline-none hover:scale-105 transition-all" type="submit" value="Add"/>
 	</form>
+        <Horizontal />
       </div>
     </section>
   )
