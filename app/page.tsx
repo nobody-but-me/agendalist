@@ -20,11 +20,11 @@ function CheckBox({click}) {
   return <button onClick={clicked} className="bg-[#242424] hover:bg-[#525252] flex flex-row justify-center items-center text-white w-5 h-5 text-sm cursor-pointer rounded-sm text-md transition-all">{(isSelect === true) ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 transition-all"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg> : <></>}</button>;
 }
 
-function TodoElement({text, checked}) {
+function Task({text, checked}) {
   return (
-    <div className="flex flex-row w-full">
-      <span className="w-full">{text}</span>
+    <div className="flex flex-row items-center w-full gap-2">
       <CheckBox />
+      <span className="w-full">{text}</span>
     </div>
   )
 }
@@ -33,6 +33,18 @@ export default function Home() {
   
   const [taskToBeAdd, setTaskToBeAdd] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  
+  const fetch_data = async () => {
+    // Fetching supabase data
+    setLoading(true);
+    
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   
   const add_task = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +68,7 @@ export default function Home() {
       <div className="w-1/3 h-auto flex flex-col p-5 justify-center gap-1 border-2 border-solid border-white rounded-sm">
         <Horizontal />
         {(tasks.length === 0) ? <span>No tasks added yet</span> : <>{tasks.map((task, index) => (
-	  <TodoElement key={index} text={task} />
+	  <Task key={index} text={task} />
 	))}</>}
 	<Horizontal />
 	<form onSubmit={add_task} className="flex flex-row justify-center gap-2">
