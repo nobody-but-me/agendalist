@@ -4,11 +4,9 @@ import React, { useState, useEffect } from 'react';
 
 import Horizontal from '@/app/components/ui/horizontal_line.tsx';
 import { Input } from '@/app/components/ui/input.tsx';
+import Button from '@/app/components/ui/button.tsx';
 
 
-function Button(props) {
-  return <button type={props.type} onClick={props.click} className={(props.class) ? props.class : "w-full bg-[#242424] pb-1 pt-1 text-sm cursor-pointer rounded-sm text-md hover:bg-[#070707] outline-none hover:scale-105 transition-all"}>{props.value}</button>;
-}
 
 function CheckBox({click}) {
   const [isSelect, setIsSelect] = useState(false);
@@ -65,7 +63,7 @@ export default function Home() {
   
   return (
     <section className="w-screen h-screen flex flex-row justify-center items-center bg-[#070707] p-5">
-      <div className="w-1/3 h-auto flex flex-col p-5 justify-center gap-1 border-2 border-solid border-white rounded-sm">
+      <div className="w-[50%] h-auto flex flex-col p-5 justify-center gap-1 border-2 border-solid border-white rounded-sm">
         <Horizontal />
         {(tasks.length === 0) ? <span>No tasks added yet</span> : <>{tasks.map((task, index) => (
 	  <Task key={index} text={task} />
